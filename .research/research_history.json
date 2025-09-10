@@ -6,5 +6,82 @@
     "experience replay optimization",
     "pruning quantization continual learning",
     "core-set continual learning"
+  ],
+  "research_study_list": [
+    {
+      "title": "Contextual Transformation Networks for Online Continual Learning"
+    },
+    {
+      "title": "SparCL: Sparse Continual Learning on the Edge"
+    },
+    {
+      "title": "Computationally Budgeted Continual Learning: What Does Matter?"
+    },
+    {
+      "title": "Continual Learning in Low-rank Orthogonal Subspaces"
+    },
+    {
+      "title": "MECTA: Memory-Economic Continual Test-Time Model Adaptation"
+    },
+    {
+      "title": "Kanerva++: Extending the Kanerva Machine With Differentiable, Locally Block Allocated Latent Memory"
+    },
+    {
+      "title": "Predicting Event Memorability from Contextual Visual Semantics"
+    },
+    {
+      "title": "Model-Based Episodic Memory Induces Dynamic Hybrid Controls"
+    },
+    {
+      "title": "General Sequential Episodic Memory Model"
+    },
+    {
+      "title": "Meta-Learning Deep Energy-Based Memory Models"
+    },
+    {
+      "title": "Revisiting Fundamentals of Experience Replay"
+    },
+    {
+      "title": "Replay Memory as An Empirical MDP: Combining Conservative Estimation with Experience Replay"
+    },
+    {
+      "title": "Large Batch Experience Replay"
+    },
+    {
+      "title": "Large Batch Experience Replay"
+    },
+    {
+      "title": "Regret Minimization Experience Replay in Off-Policy Reinforcement Learning"
+    },
+    {
+      "title": "Online Learned Continual Compression with Adaptive Quantization Modules"
+    },
+    {
+      "title": "Uncertainty-guided Continual Learning with Bayesian Neural Networks"
+    },
+    {
+      "title": "Vector Quantization Prompting for Continual Learning"
+    },
+    {
+      "title": "Pruning vs Quantization: Which is Better?"
+    },
+    {
+      "title": "SparCL: Sparse Continual Learning on the Edge"
+    },
+    {
+      "title": "Coresets via Bilevel Optimization for Continual Learning and Streaming"
+    },
+    {
+      "title": "Probabilistic Bilevel Coreset Selection"
+    },
+    {
+      "title": "Probabilistic Bilevel Coreset Selection"
+    },
+    {
+      "title": "Bilevel Coreset Selection in Continual Learning: A New Formulation and Algorithm"
+    },
+    {
+      "title": "Kernel Continual Learning"
+    }
   ]
 }
