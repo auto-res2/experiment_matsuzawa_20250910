@@ -1,0 +1,5 @@
+=== uv sync start Wed Sep 10 05:29:35 AM UTC 2025 ===
+=== uv install end Wed Sep 10 05:30:54 AM UTC 2025 ===
+=== experiment start Wed Sep 10 05:30:54 AM UTC 2025 ===
+
+========== EXPERIMENT 1 – DEPTH SCALABILITY ==========
