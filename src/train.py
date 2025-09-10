@@ -52,7 +52,7 @@ class CountSketch(nn.Module):
         self.in_dim = in_dim
 
     def forward(self, x: torch.Tensor):  # x:(B,D)
-        res = torch.zeros(x.size(0), self.k, device=x.device)
+        res = torch.zeros(x.size(0), self.k, device=x.device, dtype=x.dtype)
         idx_exp = self.idx.expand(x.size(0), -1)
         res.scatter_add_(1, idx_exp, x * self.sgn)
         return res
@@ -61,15 +61,18 @@ class CountSketch(nn.Module):
 class SketchMemory(nn.Module):
     """Running sum & count per class occupying O(k·C) memory."""
 
-    def __init__(self, k: int, n_classes: int, device="cpu"):
+    def __init__(self, k: int, n_classes: int, dtype: torch.dtype = torch.float16):
         super().__init__()
-        self.S = torch.zeros(n_classes, k, dtype=torch.float16, device=device)
-        self.N = torch.zeros(n_classes, dtype=torch.int32, device=device)
+        # Register as buffers so that `.to(device)` moves them together with the model
+        self.register_buffer("S", torch.zeros(n_classes, k, dtype=dtype), persistent=False)
+        self.register_buffer("N", torch.zeros(n_classes, dtype=torch.int32), persistent=False)
         self.k = k
         self.n_classes = n_classes
 
     @torch.no_grad()
     def update(self, cs: torch.Tensor, labels: torch.Tensor):
+        # Cast to match memory dtype to avoid dtype mismatch when accumulating
+        cs = cs.to(self.S.dtype)
         for c in range(self.n_classes):
             mask = labels == c
             if mask.any():

@@ -30,11 +30,12 @@ CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
 # ------------------------------------------------------------------
 # Mandatory path update (cf. problem statement)
 # ------------------------------------------------------------------
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration3"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration4"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
+
 
 
 def _load_cfg():
@@ -94,7 +95,7 @@ def run_experiment_1(cfg):
                 }
                 json_results[run_key] = res
 
-                # save json per-run
+                # save json per-run (mandatory directory & file naming)
                 json_fp = RESEARCH_DIR / f"{run_key}.json"
                 with open(json_fp, "w") as f:
                     json.dump(res, f, indent=2)
