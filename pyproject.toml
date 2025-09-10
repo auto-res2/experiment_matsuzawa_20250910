@@ -27,8 +27,8 @@ full = [
   "networkx>=3.0",
   "matplotlib>=3.7",
   "seaborn>=0.13",
-  # Fixed: correct version range for GraphRicciCurvature. Previous 1.6 did not exist.
-  "GraphRicciCurvature>=0.7.0,<1.0",
+  # Corrected version constraint – latest available release is 0.5.3.2.
+  "GraphRicciCurvature~=0.5.3",
 ]
 
 [build-system]

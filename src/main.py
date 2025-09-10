@@ -107,9 +107,9 @@ if not CFG_PATH.exists():
 ###############################################################################
 
 def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
-    # Paths updated to follow mandatory iteration6 requirements
-    base_dir = ensure_dir(".research/iteration6")
-    images_dir = ensure_dir(".research/iteration6/images")
+    # Updated paths to satisfy iteration7 requirements
+    base_dir = ensure_dir(".research/iteration7")
+    images_dir = ensure_dir(".research/iteration7/images")
 
     all_results: Dict[str, Any] = {}
 
@@ -178,7 +178,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
                 raise RuntimeError("Best metrics were not captured – check training loop.")
             per_depth[depth] = best_metrics
 
-        # Save per-dataset results to mandatory JSON location
+        # Save per-dataset results to mandatory JSON location (.research/iteration7)
         json_path = base_dir / f"{dataset_name}.json"
         dump_json(per_depth, json_path)
 
