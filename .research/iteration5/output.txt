@@ -1,0 +1,6 @@
+=== uv sync start Wed Sep 10 05:54:45 AM UTC 2025 ===
+=== uv install end Wed Sep 10 05:54:50 AM UTC 2025 ===
+=== experiment start Wed Sep 10 05:54:50 AM UTC 2025 ===
+
+=== Running cifar100_sketch_cl_500KB ===
+Memory budget 0.51 MB exceeded: 1897.12 MB
