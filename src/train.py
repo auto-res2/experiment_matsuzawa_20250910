@@ -50,6 +50,20 @@ def _create_stub_module(name: str):
 
     mod = types.ModuleType(name)
 
+    # --------------------------- safeguard: __spec__ ------------------------
+    # Python's importlib.util.find_spec raises a ValueError if a module is
+    # present in ``sys.modules`` but its ``__spec__`` field is ``None``.  This
+    # happens later in src.main when a heavy library such as PyTorch is
+    # missing and we already inserted a stub.  We therefore assign a minimal
+    # *dummy* ModuleSpec so that ``find_spec`` returns gracefully instead of
+    # raising, while still preventing any actual functionality.
+    import importlib.machinery as _machinery
+
+    mod.__spec__ = _machinery.ModuleSpec(name, loader=None)  # type: ignore[attr-defined]
+
+    # Flag so other parts of the code can reliably detect stub modules.
+    mod._is_stub = True  # type: ignore[attr-defined]
+
     # Generic attribute access – resolves *any* identifier.
     def __getattr__(_ignored: str):  # noqa: D401 – dynamic attr hook
         # Return a class for capitalised names, function otherwise.

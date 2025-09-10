@@ -39,7 +39,13 @@ evaluate = _eval.evaluate  # type: ignore[attr-defined]
 plot_line = _eval.plot_line  # type: ignore[attr-defined]
 
 # Heavy external libs (all optional / stubbed)
-torch = importlib.import_module("torch") if importlib.util.find_spec("torch") else None  # type: ignore
+try:
+    torch = importlib.import_module("torch")
+    # Detect stub modules inserted by src.train and treat them as *missing*.
+    if getattr(torch, "_is_stub", False):  # type: ignore[attr-defined]
+        torch = None
+except Exception:
+    torch = None  # PyTorch truly absent
 
 try:
     tg_datasets = importlib.import_module("torch_geometric.datasets")
@@ -95,6 +101,7 @@ DEFAULT_CFG: Dict[str, Any] = {
         "tau": 0.05,
     }
 }
+# Write default config only if the file **does not exist at all**
 if not CFG_PATH.exists():
     CFG_PATH.parent.mkdir(parents=True, exist_ok=True)
     with CFG_PATH.open("w") as fp:
@@ -108,8 +115,8 @@ if not CFG_PATH.exists():
 def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
     exp_name = cfg["name"]
     # Directories as per mandatory guidelines
-    base_dir = ensure_dir(".research/iteration2")
-    images_dir = ensure_dir(".research/iteration2/images")
+    base_dir = ensure_dir(".research/iteration3")
+    images_dir = ensure_dir(".research/iteration3/images")
 
     all_results: Dict[str, Any] = {}
 
@@ -128,12 +135,12 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
 
         κ_path = Path(base_dir) / f"curv_{dataset_name}.pt"
         if κ_path.exists():
-            κ = torch.load(κ_path)  # type: ignore[attr-defined]
+            κ = importlib.import_module("torch").load(κ_path)  # type: ignore[attr-defined]
         else:
             κ = compute_ollivier_ricci(data.edge_index, data.num_nodes)
-            torch.save(κ, κ_path)  # type: ignore[attr-defined]
+            importlib.import_module("torch").save(κ, κ_path)  # type: ignore[attr-defined]
 
-        device = torch.device("cuda" if torch and torch.cuda.is_available() else "cpu")  # type: ignore
+        device = importlib.import_module("torch").device("cuda" if torch and torch.cuda.is_available() else "cpu")  # type: ignore
         data = data.to(device)
         κ = κ.to(device)
 
@@ -230,10 +237,12 @@ def main() -> None:
     set_seed()
 
     with CFG_PATH.open("r") as fp:
-        cfg = yaml.safe_load(fp)
+        cfg = yaml.safe_load(fp) or DEFAULT_CFG
 
+    # Merge with default so that *new* keys still appear if user shortened the
+    # YAML configuration but rely on defaults for the remaining parameters.
     if "experiment_1" not in cfg:
-        raise KeyError("Config missing 'experiment_1' section.")
+        cfg["experiment_1"] = DEFAULT_CFG["experiment_1"]
 
     run_depth_stress_test(cfg["experiment_1"])
 
