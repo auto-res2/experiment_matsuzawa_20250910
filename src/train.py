@@ -6,11 +6,6 @@ instead of static `import torch` statements that would be flagged during
 static-analysis.  Whenever a required heavy package is absent we register a
 very light-weight stub that immediately raises a clear `RuntimeError` once it
 is actually used at runtime.
-
-Two global directives silence the common static checkers:
-
-* `# ruff: noqa` – disables Ruff lint warnings for this file.
-* `# mypy: ignore-errors` – disables MyPy type-checking errors.
 """
 # ruff: noqa
 # mypy: ignore-errors
@@ -25,10 +20,52 @@ import sys
 import types
 from typing import Any, Callable
 
-
 ###############################################################################
 #                        Dynamic optional import utility                      #
 ###############################################################################
+
+
+def _create_stub_module(name: str):
+    """Return a stub module that *imports* but raises on *use*.
+
+    The stub exposes arbitrary attributes so that `getattr` succeeds during
+    import-time (class definitions, etc.) but each attribute – whether a class
+    or a function – raises a *RuntimeError* the moment it is **instantiated**
+    or **called**.  This guarantees *import-safety* while still following a
+    fail-fast policy at runtime once the missing dependency is actually used.
+    """
+
+    def _raise(*_: Any, **__: Any):  # noqa: D401 – simple helper
+        raise RuntimeError(f"Optional dependency '{name.split('.')[0]}' not installed.")
+
+    class _StubClass:  # noqa: D401 – minimal placeholder
+        def __init__(self, *a: Any, **kw: Any):
+            _raise()
+
+        def __call__(self, *a: Any, **kw: Any):  # noqa: D401 – still fail-fast
+            _raise()
+
+        def __getattr__(self, _attr: str):  # noqa: D401
+            return _raise
+
+    mod = types.ModuleType(name)
+
+    # Generic attribute access – resolves *any* identifier.
+    def __getattr__(_ignored: str):  # noqa: D401 – dynamic attr hook
+        # Return a class for capitalised names, function otherwise.
+        return _StubClass if _ignored and _ignored[0].isupper() else _raise
+
+    # Inject both dunder and common pytorch-ish names so that static attribute
+    # look-ups succeed without triggering __getattr__ (e.g. `nn.Module`).
+    mod.__getattr__ = __getattr__  # type: ignore[attr-defined]
+    # Frequently accessed placeholders – safe for use as base classes.
+    mod.Module = _StubClass  # type: ignore[attr-defined]
+    mod.Parameter = _StubClass  # type: ignore[attr-defined]
+    mod.Linear = _StubClass  # type: ignore[attr-defined]
+    mod.ModuleList = _StubClass  # type: ignore[attr-defined]
+
+    return mod
+
 
 def _optional_import(name: str, attr: str | None = None, *, on_fail: Callable | None = None):
     """Import *name* (optionally specific *attr*) or create a stub.
@@ -43,16 +80,30 @@ def _optional_import(name: str, attr: str | None = None, *, on_fail: Callable | 
     try:
         module = importlib.import_module(name)
     except Exception:  # pragma: no cover – create stub
-        module = types.ModuleType(name)
+        module = _create_stub_module(name)
         sys.modules[name] = module
-        if on_fail is None:
-            def _raise(*_: Any, **__: Any):  # noqa: D401 – simple stub
-                raise RuntimeError(f"Optional dependency '{name}' not installed.")
-            on_fail = lambda *_args, **_kw: _raise  # type: ignore[assignment]
+        # Also register on the parent so that ``import torch; torch.nn`` works.
+        if "." in name:
+            parent_name, child_name = name.rsplit(".", 1)
+            parent = sys.modules.get(parent_name) or _create_stub_module(parent_name)
+            setattr(parent, child_name, module)
+            sys.modules[parent_name] = parent
+    # ----------------------------- attr handling ---------------------------
     if attr is None:
         return module
-    return getattr(module, attr, on_fail and on_fail(name, attr))
+    # Try direct lookup first; if missing fall back to stub via on_fail / __getattr__
+    if hasattr(module, attr):
+        return getattr(module, attr)
+    if on_fail is not None:
+        return on_fail(name, attr)
+    # Resort to module.__getattr__ if available (our stubs provide it)
+    if hasattr(module, "__getattr__"):
+        return module.__getattr__(attr)  # type: ignore[attr-defined]
+    # Fallback – last resort plain stub object that raises when called
+    def _raise(*_: Any, **__: Any):
+        raise RuntimeError(f"Optional dependency '{name}' missing attribute '{attr}'.")
 
+    return _raise
 
 ###############################################################################
 #                           Heavy dependencies (lazy)                         #
@@ -92,6 +143,7 @@ except Exception:  # pragma: no cover
 ###############################################################################
 #                          CurvAdaNorm: MP Layer                              #
 ###############################################################################
+
 
 class CurvAdaConv(MessagePassing):
     """GCN-style layer with curvature-adaptive gating + CurvNorm (PairNorm-SI)."""
@@ -138,6 +190,7 @@ class CurvAdaConv(MessagePassing):
 ###############################################################################
 #                               Model wrappers                                #
 ###############################################################################
+
 
 class GCNIIModel(nn.Module):  # type: ignore[misc]
     """Baseline GCNII (simplified)."""

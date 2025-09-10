@@ -64,8 +64,10 @@ except Exception:  # pragma: no cover – stubs
     class _SchedulerStub:  # pragma: no cover
         def __init__(self, *_, **__):
             pass
+
         def step(self):  # noqa: D401 – stub
             pass
+
     CosineAnnealingLR = _SchedulerStub  # type: ignore[assignment]
 
 ###############################################################################
@@ -102,9 +104,13 @@ if not CFG_PATH.exists():
 #                           Depth stress-test runner                          #
 ###############################################################################
 
+
 def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
     exp_name = cfg["name"]
-    out_dir = ensure_dir(f"outputs/{exp_name}")
+    # Directories as per mandatory guidelines
+    base_dir = ensure_dir(".research/iteration2")
+    images_dir = ensure_dir(".research/iteration2/images")
+
     all_results: Dict[str, Any] = {}
 
     for dataset_name in cfg["datasets"]:
@@ -120,7 +126,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
         data.edge_index, _ = add_self_loops(data.edge_index)  # type: ignore
         data.x = data.x / (data.x.sum(1, keepdim=True) + 1e-8)
 
-        κ_path = Path(out_dir) / f"curv_{dataset_name}.pt"
+        κ_path = Path(base_dir) / f"curv_{dataset_name}.pt"
         if κ_path.exists():
             κ = torch.load(κ_path)  # type: ignore[attr-defined]
         else:
@@ -173,7 +179,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
             per_depth[depth] = best_metrics
 
         # ---------------- Save JSON & plots -------------------------------
-        json_path = Path(out_dir) / f"{dataset_name}.json"
+        json_path = base_dir / f"{dataset_name}.json"
         dump_json(per_depth, json_path)
 
         depths = list(per_depth.keys())
@@ -187,7 +193,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
             xlabel="Depth (layers)",
             ylabel="Accuracy",
             title=f"{dataset_name} – Accuracy vs Depth ({cfg['variant']})",
-            save_path=Path(out_dir) / f"accuracy_{dataset_name}_{cfg['variant']}.pdf",
+            save_path=images_dir / f"accuracy_{dataset_name}_{cfg['variant']}.pdf",
         )
         plot_line(
             depths,
@@ -195,7 +201,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
             xlabel="Depth (layers)",
             ylabel="RowDiff",
             title=f"{dataset_name} – Oversmoothing ({cfg['variant']})",
-            save_path=Path(out_dir) / f"rowdiff_{dataset_name}_{cfg['variant']}.pdf",
+            save_path=images_dir / f"rowdiff_{dataset_name}_{cfg['variant']}.pdf",
         )
         plot_line(
             depths,
@@ -203,7 +209,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
             xlabel="Depth (layers)",
             ylabel="GDR",
             title=f"{dataset_name} – GDR vs Depth ({cfg['variant']})",
-            save_path=Path(out_dir) / f"gdr_{dataset_name}_{cfg['variant']}.pdf",
+            save_path=images_dir / f"gdr_{dataset_name}_{cfg['variant']}.pdf",
         )
 
         all_results[dataset_name] = per_depth
@@ -211,13 +217,14 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
     # ---------------- Print summary to STDOUT -----------------------------
     print("\n=== Experiment 1 – Depth Stress Test ===")
     print(json.dumps(all_results, indent=2))
-    print("Figures written to", out_dir.resolve())
+    print("Figures written to", images_dir.resolve())
 
     return all_results
 
 ###############################################################################
 #                                    main                                     #
 ###############################################################################
+
 
 def main() -> None:
     set_seed()
