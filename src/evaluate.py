@@ -29,11 +29,10 @@ def _lazy(name: str):
 # Heavy libs (stubs if absent)
 torch = _lazy("torch")
 matplotlib = _lazy("matplotlib")
-_lazy("matplotlib.pyplot")  # register submodule so seaborn does not complain
+_lazy("matplotlib.pyplot")
 plt = _lazy("matplotlib.pyplot")
 sns = _lazy("seaborn")
 
-# Retrieve CurvGCNII dynamically to avoid static import errors
 CurvGCNII = getattr(importlib.import_module("src.train"), "CurvGCNII", object)
 
 ###############################################################################
@@ -74,7 +73,7 @@ def group_distance_ratio(h: "torch.Tensor", y: "torch.Tensor") -> float:  # type
 #                               Full evaluation                               #
 ###############################################################################
 
-def evaluate(model, data, κ):  # noqa: N803 – Greek letter
+def evaluate(model, data, κ):  # noqa: N803
     """Run model on all splits and compute metrics."""
     model.eval()
     with torch.no_grad():
@@ -115,6 +114,7 @@ def dump_json(obj: Any, path: Path) -> None:
 
 
 def plot_line(x: List[int], y: List[float], *, xlabel: str, ylabel: str, title: str, save_path: Path) -> None:
+    save_path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(6, 4))
     sns.lineplot(x=x, y=y, marker="o")
     for x_i, y_i in zip(x, y):

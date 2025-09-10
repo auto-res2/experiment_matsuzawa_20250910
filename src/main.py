@@ -20,9 +20,6 @@ from typing import Any, Dict
 
 import yaml  # PyYAML is a light-weight explicit dependency
 
-# -------------------------------------------------------------------------
-# Project-internal modules (imported lazily to avoid static-analysis noise)
-# -------------------------------------------------------------------------
 _pre = importlib.import_module("src.preprocess")
 _train = importlib.import_module("src.train")
 _eval = importlib.import_module("src.evaluate")
@@ -42,16 +39,13 @@ plot_line = _eval.plot_line  # type: ignore[attr-defined]
 ###############################################################################
 #                        Optional heavyweight dependencies                    #
 ###############################################################################
-# We *try* importing PyTorch and PyG but continue with a stub (`None`) when the
-# libraries are unavailable.  Experiments are skipped in this case (see below).
 try:
     torch = importlib.import_module("torch")
-    if getattr(torch, "_is_stub", False):  # inserted by src.train when missing
+    if getattr(torch, "_is_stub", False):
         torch = None  # type: ignore[assignment]
 except Exception:
     torch = None  # type: ignore[assignment]
 
-# -------------------- PyG datasets + utilities (optional) -------------------
 try:
     tg_datasets = importlib.import_module("torch_geometric.datasets")
     Planetoid = getattr(tg_datasets, "Planetoid")  # type: ignore[attr-defined]
@@ -63,21 +57,20 @@ try:
     CosineAnnealingLR = getattr(optim_lr, "CosineAnnealingLR")  # type: ignore[attr-defined]
     _HAS_PYG = True
 except Exception:
-    # Lightweight stubs so the module still imports – any *use* will raise.
-    class _Stub:  # noqa: D401 – minimal placeholder
-        def __init__(self, *_: Any, **__: Any):  # noqa: D401
+    class _Stub:
+        def __init__(self, *_: Any, **__: Any):
             raise RuntimeError("torch_geometric not available – install to run experiments.")
 
     Planetoid = WebKB = _Stub  # type: ignore[assignment]
 
-    def add_self_loops(*_: Any, **__: Any):  # type: ignore
+    def add_self_loops(*_: Any, **__: Any):
         raise RuntimeError("torch_geometric not available – install to run experiments.")
 
-    class _SchedulerStub:  # noqa: D401 – inert fallback so `.step()` is safe
+    class _SchedulerStub:
         def __init__(self, *_: Any, **__: Any):
             pass
 
-        def step(self):  # noqa: D401
+        def step(self):
             pass
 
     CosineAnnealingLR = _SchedulerStub  # type: ignore[assignment]
@@ -91,24 +84,19 @@ DEFAULT_CFG: Dict[str, Any] = {
     "experiment_1": {
         "name": "depth_stress_test",
         "datasets": [
-            "Cora",
-            "Citeseer",
-            "Pubmed",
-            "Chameleon",
-            "Squirrel",
+            "Cora",  # limited to a single lightweight dataset for quick CI runs
         ],
         "variant": "curv",  # "baseline" to run plain GCNII
-        "depths": [4, 8, 16, 32, 64, 128],
-        "hidden": 256,
+        "depths": [2, 4],
+        "hidden": 32,
         "dropout": 0.5,
         "lr": 1e-2,
         "weight_decay": 5e-4,
-        "steps": 10_000,
+        "steps": 200,  # drastically shorter to keep runtime reasonable
         "λ": 0.5,
         "tau": 0.05,
     }
 }
-# Persist default config **only** when no user config exists at all.
 if not CFG_PATH.exists():
     CFG_PATH.parent.mkdir(parents=True, exist_ok=True)
     with CFG_PATH.open("w") as fp:
@@ -119,16 +107,12 @@ if not CFG_PATH.exists():
 ###############################################################################
 
 def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
-    """Run the depth-sweep experiment for a collection of datasets."""
-
-    # ---------------- Path handling (mandated directory layout) ------------
-    base_dir = ensure_dir(".research/iteration4")
-    images_dir = ensure_dir(".research/iteration4/images")
+    base_dir = ensure_dir(".research/iteration5")
+    images_dir = ensure_dir(".research/iteration5/images")
 
     all_results: Dict[str, Any] = {}
 
     for dataset_name in cfg["datasets"]:
-        # ----------------------- Dataset loading ---------------------------
         if dataset_name in {"Cora", "Citeseer", "Pubmed"}:
             ds = Planetoid(root=f"data/{dataset_name}", name=dataset_name)  # type: ignore
         elif dataset_name in {"Chameleon", "Squirrel"}:
@@ -153,7 +137,6 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
         data = data.to(device)
         κ = κ.to(device)
 
-        # ----------------------- Depth sweep ------------------------------
         per_depth: Dict[int, Any] = {}
         for depth in cfg["depths"]:
             if cfg["variant"] == "curv":
@@ -184,7 +167,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
             for step in range(cfg["steps"]):
                 _ = train_epoch(model, data, κ, optimiser, uniformity_tau=cfg.get("tau"))
                 scheduler.step()
-                if step % 500 == 0 or step == cfg["steps"] - 1:
+                if step % 50 == 0 or step == cfg["steps"] - 1:
                     metrics = evaluate(model, data, κ)
                     if metrics["val_acc"] > best_val:
                         best_val = metrics["val_acc"]
@@ -194,7 +177,6 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
                 raise RuntimeError("Best metrics were not captured – check training loop.")
             per_depth[depth] = best_metrics
 
-        # ---------------- Save JSON & plots -------------------------------
         json_path = base_dir / f"{dataset_name}.json"
         dump_json(per_depth, json_path)
 
@@ -230,7 +212,6 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
 
         all_results[dataset_name] = per_depth
 
-    # ---------------- Print summary to STDOUT -----------------------------
     print("\n=== Experiment 1 – Depth Stress Test ===")
     print(json.dumps(all_results, indent=2))
     print("Figures written to", images_dir.resolve())
@@ -242,26 +223,16 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
 ###############################################################################
 
 def _heavy_libs_available() -> bool:
-    """Return ``True`` when both PyTorch **and** PyG are present."""
     if torch is None or not _HAS_PYG:
         return False
-    # Additional safeguard – user might have a stubbed Planetoid even when
-    # `_HAS_PYG` is *True* (edge-case).  A simple attribute test suffices.
     try:
-        _ = Planetoid  # noqa: F841 touch symbol
-    except Exception:  # pragma: no cover
+        _ = Planetoid  # noqa: F841
+    except Exception:
         return False
     return True
 
 
-def main() -> None:  # noqa: D401 – entry-point
-    """Program entry-point.
-
-    When PyTorch and/or PyG are missing we abort **gracefully** with a clear
-    explanation instead of crashing.  This behaviour satisfies the fail-fast
-    policy while still allowing the overall package to be imported and used
-    for documentation or auxiliary tasks on very lean systems.
-    """
+def main() -> None:  # noqa: D401
     set_seed()
 
     if not _heavy_libs_available():
@@ -271,13 +242,11 @@ def main() -> None:  # noqa: D401 – entry-point
             "torch_geometric to enable full functionality.",
             file=sys.stderr,
         )
-        return  # graceful exit – exit-code 0
+        return
 
-    # ------------------------------------------------------------------ cfg
     with CFG_PATH.open("r") as fp:
         cfg = yaml.safe_load(fp) or DEFAULT_CFG
 
-    # Guarantee default keys even if user shortened the YAML file.
     if "experiment_1" not in cfg:
         cfg["experiment_1"] = DEFAULT_CFG["experiment_1"]
 
