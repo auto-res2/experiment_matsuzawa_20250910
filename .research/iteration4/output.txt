@@ -1,0 +1,5 @@
+=== uv sync start Wed Sep 10 05:47:42 AM UTC 2025 ===
+=== uv install end Wed Sep 10 05:47:48 AM UTC 2025 ===
+=== experiment start Wed Sep 10 05:47:48 AM UTC 2025 ===
+
+=== Running cifar100_sketch_cl_500KB ===
