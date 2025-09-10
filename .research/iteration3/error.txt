@@ -1,0 +1,28 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 10 packages in 171ms
+Downloading numpy (16.2MiB)
+ Downloading numpy
+Prepared 8 packages in 1.53s
+Installed 8 packages in 405ms
+ + certifi==2025.8.3
+ + charset-normalizer==3.4.3
+ + curvadanorm==0.1.0 (from file:///home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910)
+ + idna==3.10
+ + numpy==2.3.3
+ + pyyaml==6.0.2
+ + requests==2.32.5
+ + urllib3==2.5.0
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 251, in <module>
+    main()
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 247, in main
+    run_depth_stress_test(cfg["experiment_1"])
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 126, in run_depth_stress_test
+    ds = Planetoid(root=f"data/{dataset_name}", name=dataset_name)  # type: ignore
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 63, in __init__
+    raise RuntimeError("torch_geometric not available – install to run experiments.")
+RuntimeError: torch_geometric not available – install to run experiments.
