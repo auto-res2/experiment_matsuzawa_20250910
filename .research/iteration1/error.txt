@@ -1,0 +1,211 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 5 packages in 84ms
+   Building generative-token-replay @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+Downloading numpy (16.2MiB)
+ Downloading numpy
+  × Failed to build `generative-token-replay @
+  │ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta.build_editable` failed (exit status: 1)
+
+      [stdout]
+      configuration error: `project.authors[0]` must be object
+      GIVEN VALUE:
+          "Researcher <research@example.com>"
+
+      OFFENDING RULE: 'type'
+
+      DEFINITION:
+          {
+              "$id": "#/definitions/author",
+              "title": "Author or Maintainer",
+              "$comment":
+      "https://peps.python.org/pep-0621/#authors-maintainers",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "$$description": [
+                          "MUST be a valid email name, i.e. whatever can be
+      put as a name, before an",
+                          "email, in :rfc:`822`."
+                      ]
+                  },
+                  "email": {
+                      "type": "string",
+                      "format": "idn-email",
+                      "description": "MUST be a valid email address"
+                  }
+              }
+          }
+
+      For more details about `format` see
+      https://validate-pyproject.readthedocs.io/en/latest/api/validate_pyproject.formats.html
+
+
+      [stderr]
+      Traceback (most recent call last):
+        File "<string>", line 14, in <module>
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 473, in get_requires_for_build_editable
+          return self.get_requires_for_build_wheel(config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 331, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 301, in _get_build_requires
+          self.run_setup()
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 1, in <module>
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/__init__.py",
+      line 115, in setup
+          return distutils.core.setup(**attrs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/_distutils/core.py",
+      line 160, in setup
+          dist.parse_config_files()
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/_virtualenv.py",
+      line 20, in parse_config_files
+          result = old_parse_config_files(self, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/dist.py",
+      line 756, in parse_config_files
+          pyprojecttoml.apply_configuration(self, filename,
+      ignore_option_errors)
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 72, in apply_configuration
+          config = read_configuration(filepath, True, ignore_option_errors,
+      dist)
+      
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 140, in read_configuration
+          validate(subset, filepath)
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpqmNPae/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 61, in validate
+          raise ValueError(f"{error}\n{summary}") from None
+      ValueError: invalid pyproject.toml config: `project.authors[0]`.
+      configuration error: `project.authors[0]` must be object
+
+      hint: This usually indicates a problem with the package or the build
+      environment.
+   Building generative-token-replay @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+  × Failed to build `generative-token-replay @
+  │ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910`
+  ├─▶ The build backend returned an error
+  ╰─▶ Call to `setuptools.build_meta.build_editable` failed (exit status: 1)
+
+      [stdout]
+      configuration error: `project.authors[0]` must be object
+      GIVEN VALUE:
+          "Researcher <research@example.com>"
+
+      OFFENDING RULE: 'type'
+
+      DEFINITION:
+          {
+              "$id": "#/definitions/author",
+              "title": "Author or Maintainer",
+              "$comment":
+      "https://peps.python.org/pep-0621/#authors-maintainers",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                  "name": {
+                      "type": "string",
+                      "$$description": [
+                          "MUST be a valid email name, i.e. whatever can be
+      put as a name, before an",
+                          "email, in :rfc:`822`."
+                      ]
+                  },
+                  "email": {
+                      "type": "string",
+                      "format": "idn-email",
+                      "description": "MUST be a valid email address"
+                  }
+              }
+          }
+
+      For more details about `format` see
+      https://validate-pyproject.readthedocs.io/en/latest/api/validate_pyproject.formats.html
+
+
+      [stderr]
+      Traceback (most recent call last):
+        File "<string>", line 14, in <module>
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 473, in get_requires_for_build_editable
+          return self.get_requires_for_build_wheel(config_settings)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 331, in get_requires_for_build_wheel
+          return self._get_build_requires(config_settings, requirements=[])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 301, in _get_build_requires
+          self.run_setup()
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/build_meta.py",
+      line 317, in run_setup
+          exec(code, locals())
+        File "<string>", line 1, in <module>
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/__init__.py",
+      line 115, in setup
+          return distutils.core.setup(**attrs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/_distutils/core.py",
+      line 160, in setup
+          dist.parse_config_files()
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/_virtualenv.py",
+      line 20, in parse_config_files
+          result = old_parse_config_files(self, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/dist.py",
+      line 756, in parse_config_files
+          pyprojecttoml.apply_configuration(self, filename,
+      ignore_option_errors)
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 72, in apply_configuration
+          config = read_configuration(filepath, True, ignore_option_errors,
+      dist)
+      
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 140, in read_configuration
+          validate(subset, filepath)
+        File
+      "/home/toma/.cache/uv/builds-v0/.tmpydcyGJ/lib/python3.11/site-packages/setuptools/config/pyprojecttoml.py",
+      line 61, in validate
+          raise ValueError(f"{error}\n{summary}") from None
+      ValueError: invalid pyproject.toml config: `project.authors[0]`.
+      configuration error: `project.authors[0]` must be object
+
+      hint: This usually indicates a problem with the package or the build
+      environment.
