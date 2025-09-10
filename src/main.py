@@ -30,12 +30,11 @@ CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
 # ------------------------------------------------------------------
 # Mandatory path update (cf. problem statement)
 # ------------------------------------------------------------------
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration6"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration7"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
-
 
 
 
@@ -98,7 +97,7 @@ def run_experiment_1(cfg):
 
                 res = {
                     "accuracy_per_task": acc_curve,
-                    "avg_final_accuracy": sum(acc_curve[-5:]) / 5,
+                    "avg_final_accuracy": sum(acc_curve[-5:]) / 5 if len(acc_curve) >= 5 else sum(acc_curve) / max(len(acc_curve),1),
                 }
                 json_results[run_key] = res
 

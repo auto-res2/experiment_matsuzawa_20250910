@@ -185,15 +185,37 @@ class SketchCLNet(nn.Module):
         return loss_cls + 0.1 * loss_dec + 0.2 * loss_replay
 
 ############################################################
+#  Baseline wrapper – provides a minimal `online_step` for plain models
+############################################################
+
+class BaselineWrapper(nn.Module):
+    """Wrap standard classification models so they can be trained with `train_one_task`."""
+
+    def __init__(self, model: nn.Module):
+        super().__init__()
+        self.model = model
+
+    def forward(self, x):  # noqa: D401 – simple forward pass
+        return self.model(x)
+
+    def online_step(self, x, y):
+        """Single forward/backward step using standard cross entropy loss."""
+        logits = self.model(x)
+        return F.cross_entropy(logits, y)
+
+############################################################
 #  Model factory & training loop
 ############################################################
+
 
 def build_model(method: str, num_classes: int, k: int, sparsity: float):
     """Factory returning the model associated with *method*."""
     if method == "sketch_cl":
         return SketchCLNet("resnet18", num_classes, k, sparsity)
-    # baselines use the same ResNet-18 backbone to avoid extra dependencies
-    return timm.create_model("resnet18", pretrained=True, num_classes=num_classes)
+
+    # Fallback baseline – wrap the backbone so that `online_step` is available.
+    backbone = timm.create_model("resnet18", pretrained=True, num_classes=num_classes)
+    return BaselineWrapper(backbone)
 
 
 def train_one_task(

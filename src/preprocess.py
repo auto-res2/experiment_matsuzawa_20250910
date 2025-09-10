@@ -91,7 +91,12 @@ class ContinualSplit:
         self.name = dataset_name
         local_dir = Path(data_root) / dataset_name.replace("/", "_")
         local_dir.mkdir(parents=True, exist_ok=True)
-        self.raw = load_dataset(hf_repo, split=split, cache_dir=str(local_dir))
+
+        # ------------------------------------------------------------------
+        # Keep track of the cache directory for later reuse (test split)
+        # ------------------------------------------------------------------
+        self.cache_dir = str(local_dir)
+        self.raw = load_dataset(hf_repo, split=split, cache_dir=self.cache_dir)
 
         self.n_tasks = n_tasks
         self.classes_per_task = classes_per_task
@@ -119,8 +124,14 @@ class ContinualSplit:
 
     def get_test_loader(self, batch_size: int, num_workers: int):
         split = "test" if "cifar" in self.name.lower() else "validation"
-        # `builder_name` lives under `.info` for datasets>=2.x
-        builder_name = self.raw.info.builder_name
-        test_ds = load_dataset(builder_name, split=split, cache_dir=self.raw.cache_dir)
+
+        # Determine builder name with robust fallbacks
+        if hasattr(self.raw, "info") and getattr(self.raw.info, "builder_name", None) is not None:
+            builder_name = self.raw.info.builder_name
+        else:
+            # Fallback: use the dataset name sans organisation (e.g. "cifar100")
+            builder_name = self.name.split("/")[-1]
+
+        test_ds = load_dataset(builder_name, split=split, cache_dir=self.cache_dir)
         test_ds = _TorchWrapper(test_ds, transform=self.test_transform)
         return DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
