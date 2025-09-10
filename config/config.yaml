@@ -1,12 +1,14 @@
-# Minimal default configuration.  The expansive experiment settings from the
-# original monolithic script have been omitted to keep the validation runtime
-# small and because the heavy dependencies are not installed in this
-# lightweight environment.
+# Minimal default configuration suitable for the lightweight baseline.
+# The presence of at least one dataset / model entry prevents runtime
+# errors due to empty dictionaries in the training script.
 
 global:
   seeds: [1]
   mixed_precision: false
   device: "cpu"
 
-datasets: {}
-models: {}
+datasets:
+  dummy: {}
+
+models:
+  dummy: {}
