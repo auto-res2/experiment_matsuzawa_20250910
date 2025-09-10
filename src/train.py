@@ -53,7 +53,8 @@ class CountSketch(nn.Module):
 
     def forward(self, x: torch.Tensor):  # x:(B,D)
         res = torch.zeros(x.size(0), self.k, device=x.device)
-        res.scatter_add_(1, self.idx.expand(x.size(0), -1), x * self.sgn)
+        idx_exp = self.idx.expand(x.size(0), -1)
+        res.scatter_add_(1, idx_exp, x * self.sgn)
         return res
 
 
@@ -118,6 +119,9 @@ class SketchCLNet(nn.Module):
 
     def __init__(self, backbone_name: str, num_classes: int, k: int, sparsity: float):
         super().__init__()
+        # Support HuggingFace weights via timm's `hf_hub:` scheme.
+        if not backbone_name.startswith("hf_hub:") and "/" in backbone_name:
+            backbone_name = f"hf_hub:{backbone_name}"
         self.backbone = timm.create_model(backbone_name, pretrained=True, num_classes=0)
         feat_dim = self.backbone.num_features
         self.count_sketch = CountSketch(feat_dim, k)

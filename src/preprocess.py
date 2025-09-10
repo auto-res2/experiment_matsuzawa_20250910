@@ -49,11 +49,18 @@ def _tiny_test_tf(size):
 class _TorchWrapper(torch.utils.data.Dataset):
     """Lazy transform wrapper around hf datasets."""
 
-    def __init__(self, ds, transform=None, img_key="img", label_key="fine_label"):
+    def __init__(self, ds, transform=None, img_key: str | None = None, label_key: str | None = None):
         self._ds = ds
-        self.transform = transform
+        # fallback logic ----------------------------------------------------
+        sample = ds[0]
+        if img_key is None:
+            img_key = "img" if "img" in sample else ("image" if "image" in sample else list(sample.keys())[0])
+        if label_key is None:
+            label_key = "fine_label" if "fine_label" in sample else ("label" if "label" in sample else list(sample.keys())[1])
+        # -------------------------------------------------------------------
         self.img_key = img_key
         self.label_key = label_key
+        self.transform = transform
 
     def __len__(self):
         return len(self._ds)

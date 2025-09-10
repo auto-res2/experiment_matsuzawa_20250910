@@ -24,6 +24,7 @@ def evaluate(model: nn.Module, loader, device) -> float:
 
 
 def plot_accuracy_curve(acc: List[float], save_path: Path, title: str):
+    save_path.parent.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(6, 4))
     plt.plot(range(len(acc)), acc, marker="o")
     for i, v in enumerate(acc):

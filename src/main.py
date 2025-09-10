@@ -27,7 +27,7 @@ except ImportError:  # likely executed with `python -m src.main`
 
 PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration1"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration2"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -92,7 +92,7 @@ def run_experiment_1(cfg):
                 json_results[run_key] = res
 
                 # save json per-run
-                json_fp = (RESEARCH_DIR / f"{run_key}.json")
+                json_fp = RESEARCH_DIR / f"{run_key}.json"
                 with open(json_fp, "w") as f:
                     json.dump(res, f, indent=2)
                 # print for immediate verification
