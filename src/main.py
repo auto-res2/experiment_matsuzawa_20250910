@@ -30,7 +30,7 @@ CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
 # ------------------------------------------------------------------
 # Mandatory path update (cf. problem statement)
 # ------------------------------------------------------------------
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration7"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration8"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
@@ -105,7 +105,7 @@ def run_experiment_1(cfg):
                 json_fp = RESEARCH_DIR / f"{run_key}.json"
                 with open(json_fp, "w") as f:
                     json.dump(res, f, indent=2)
-                # print for immediate verification
+                # print for immediate verification (required by problem statement)
                 print(json.dumps(res, indent=2))
 
                 # plot and save figure

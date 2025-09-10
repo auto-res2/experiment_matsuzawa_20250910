@@ -89,6 +89,7 @@ class ContinualSplit:
         split: str = "train",
     ):
         self.name = dataset_name
+        self.hf_repo = hf_repo  # <-- store for test split retrieval
         local_dir = Path(data_root) / dataset_name.replace("/", "_")
         local_dir.mkdir(parents=True, exist_ok=True)
 
@@ -123,15 +124,17 @@ class ContinualSplit:
         )
 
     def get_test_loader(self, batch_size: int, num_workers: int):
+        """Return a DataLoader for the *test* (or *validation*) split.
+
+        Crucially, we reload using the *same HF repository* that was used for the
+        training split. This avoids the edge-case where the original dataset
+        happens to rely on the generic "parquet" builder internally which
+        would otherwise lead to an Arrow/Parquet mismatch when re-loaded via
+        a different builder name.
+        """
         split = "test" if "cifar" in self.name.lower() else "validation"
 
-        # Determine builder name with robust fallbacks
-        if hasattr(self.raw, "info") and getattr(self.raw.info, "builder_name", None) is not None:
-            builder_name = self.raw.info.builder_name
-        else:
-            # Fallback: use the dataset name sans organisation (e.g. "cifar100")
-            builder_name = self.name.split("/")[-1]
-
-        test_ds = load_dataset(builder_name, split=split, cache_dir=self.cache_dir)
+        # Load the split from the same repo to guarantee consistency
+        test_ds = load_dataset(self.hf_repo, split=split, cache_dir=self.cache_dir)
         test_ds = _TorchWrapper(test_ds, transform=self.test_transform)
         return DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)
