@@ -1,0 +1,110 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 67 packages in 342ms
+   Building sketch-cl-research @ file:///home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+      Built sketch-cl-research @ file:///home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+Prepared 1 package in 1.21s
+Installed 66 packages in 10.64s
+ + aiohappyeyeballs==2.6.1
+ + aiohttp==3.12.15
+ + aiosignal==1.4.0
+ + attrs==25.3.0
+ + certifi==2025.8.3
+ + charset-normalizer==3.4.3
+ + contourpy==1.3.3
+ + cycler==0.12.1
+ + datasets==4.0.0
+ + dill==0.3.8
+ + filelock==3.19.1
+ + fonttools==4.59.2
+ + frozenlist==1.7.0
+ + fsspec==2025.3.0
+ + hf-xet==1.1.9
+ + huggingface-hub==0.34.4
+ + idna==3.10
+ + jinja2==3.1.6
+ + kiwisolver==1.4.9
+ + markupsafe==3.0.2
+ + matplotlib==3.10.6
+ + mpmath==1.3.0
+ + multidict==6.6.4
+ + multiprocess==0.70.16
+ + networkx==3.5
+ + numpy==2.3.3
+ + nvidia-cublas-cu12==12.8.4.1
+ + nvidia-cuda-cupti-cu12==12.8.90
+ + nvidia-cuda-nvrtc-cu12==12.8.93
+ + nvidia-cuda-runtime-cu12==12.8.90
+ + nvidia-cudnn-cu12==9.10.2.21
+ + nvidia-cufft-cu12==11.3.3.83
+ + nvidia-cufile-cu12==1.13.1.3
+ + nvidia-curand-cu12==10.3.9.90
+ + nvidia-cusolver-cu12==11.7.3.90
+ + nvidia-cusparse-cu12==12.5.8.93
+ + nvidia-cusparselt-cu12==0.7.1
+ + nvidia-nccl-cu12==2.27.3
+ + nvidia-nvjitlink-cu12==12.8.93
+ + nvidia-nvtx-cu12==12.8.90
+ + packaging==25.0
+ + pandas==2.3.2
+ + pillow==11.3.0
+ + propcache==0.3.2
+ + psutil==7.0.0
+ + pyarrow==21.0.0
+ + pyparsing==3.2.3
+ + python-dateutil==2.9.0.post0
+ + pytz==2025.2
+ + pyyaml==6.0.2
+ + requests==2.32.5
+ + safetensors==0.6.2
+ + setuptools==80.9.0
+ + six==1.17.0
+ + sketch-cl-research==0.1.0 (from file:///home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910)
+ + sympy==1.14.0
+ + timm==1.0.19
+ + torch==2.8.0
+ + torchvision==0.23.0
+ + tqdm==4.67.1
+ + triton==3.4.0
+ + typing-extensions==4.15.0
+ + tzdata==2025.2
+ + urllib3==2.5.0
+ + xxhash==3.5.0
+ + yarl==1.20.1
+Generating train split:   0%|          | 0/50000 [00:00<?, ? examples/s]Generating train split:   0%|          | 100/50000 [00:00<01:16, 650.23 examples/s]Generating train split:  39%|███▊      | 19300/50000 [00:00<00:00, 92160.31 examples/s]Generating train split:  88%|████████▊ | 44000/50000 [00:00<00:00, 154796.13 examples/s]Generating train split: 100%|██████████| 50000/50000 [00:00<00:00, 84601.85 examples/s] 
+Generating test split:   0%|          | 0/10000 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 10000/10000 [00:00<00:00, 93326.84 examples/s]
+/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/train.py:232: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = GradScaler(enabled=(optim_cfg.get("precision", "fp16") == "fp16" and device.type == "cuda"))
+  0%|          | 0/79 [00:00<?, ?it/s]/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/train.py:236: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=scaler.is_enabled()):
+  1%|▏         | 1/79 [00:04<06:05,  4.68s/it]  8%|▊         | 6/79 [00:04<00:43,  1.69it/s] 14%|█▍        | 11/79 [00:04<00:18,  3.64it/s] 20%|██        | 16/79 [00:04<00:10,  6.17it/s] 27%|██▋       | 21/79 [00:05<00:06,  9.35it/s] 33%|███▎      | 26/79 [00:05<00:04, 13.15it/s] 39%|███▉      | 31/79 [00:05<00:02, 17.46it/s] 46%|████▌     | 36/79 [00:05<00:01, 22.13it/s] 52%|█████▏    | 41/79 [00:05<00:01, 26.83it/s] 58%|█████▊    | 46/79 [00:05<00:01, 31.10it/s] 65%|██████▍   | 51/79 [00:05<00:00, 35.12it/s] 71%|███████   | 56/79 [00:05<00:00, 38.16it/s] 77%|███████▋  | 61/79 [00:05<00:00, 40.70it/s] 84%|████████▎ | 66/79 [00:06<00:00, 42.69it/s] 90%|████████▉ | 71/79 [00:06<00:00, 44.62it/s] 96%|█████████▌| 76/79 [00:06<00:00, 46.10it/s]                                               Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 136, in <module>
+    main()
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 132, in main
+    run_experiment_1(cfg)
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 89, in run_experiment_1
+    acc = ev.evaluate(model, ds.get_test_loader(256, common["num_workers"]), device)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/preprocess.py", line 135, in get_test_loader
+    test_ds = load_dataset(builder_name, split=split, cache_dir=self.cache_dir)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/datasets/load.py", line 1412, in load_dataset
+    builder_instance.download_and_prepare(
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/datasets/builder.py", line 894, in download_and_prepare
+    self._download_and_prepare(
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/datasets/builder.py", line 948, in _download_and_prepare
+    split_generators = self._split_generators(dl_manager, **split_generators_kwargs)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/datasets/packaged_modules/parquet/parquet.py", line 60, in _split_generators
+    self.info.features = datasets.Features.from_arrow_schema(pq.read_schema(f))
+                                                             ^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/pyarrow/parquet/core.py", line 2392, in read_schema
+    file = ParquetFile(
+           ^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/.venv/lib/python3.11/site-packages/pyarrow/parquet/core.py", line 328, in __init__
+    self.reader.open(
+  File "pyarrow/_parquet.pyx", line 1656, in pyarrow._parquet.ParquetReader.open
+  File "pyarrow/error.pxi", line 92, in pyarrow.lib.check_status
+pyarrow.lib.ArrowInvalid: Parquet magic bytes not found in footer. Either the file is corrupted or this is not a parquet file.
