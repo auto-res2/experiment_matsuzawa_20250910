@@ -6,5 +6,82 @@
     "continual learning memory compression",
     "replay buffer size reduction",
     "memory efficient continual learning"
+  ],
+  "research_study_list": [
+    {
+      "title": "Contextual Transformation Networks for Online Continual Learning"
+    },
+    {
+      "title": "Navigating Memory Construction by Global Pseudo-Task Simulation for Continual Learning"
+    },
+    {
+      "title": "MECTA: Memory-Economic Continual Test-Time Model Adaptation"
+    },
+    {
+      "title": "Look-ahead Meta Learning for Continual Learning"
+    },
+    {
+      "title": "Look-ahead Meta Learning for Continual Learning"
+    },
+    {
+      "title": "Decoupling Learning and Remembering: A Bilevel Memory Framework With Knowledge Projection for Task-Incremental Learning"
+    },
+    {
+      "title": "A Model or 603 Exemplars: Towards Memory-Efficient Class-Incremental Learning"
+    },
+    {
+      "title": "Incremental Learning of Structured Memory via Closed-Loop Transcription"
+    },
+    {
+      "title": "RMM: Reinforced Memory Management for Class-Incremental Learning"
+    },
+    {
+      "title": "Learning a Condensed Frame for Memory-Efficient Video Class-Incremental Learning"
+    },
+    {
+      "title": "Online Learned Continual Compression with Adaptive Quantization Modules"
+    },
+    {
+      "title": "Remember the Past: Distilling Datasets into Addressable Memories for Neural Networks"
+    },
+    {
+      "title": "Contextual Transformation Networks for Online Continual Learning"
+    },
+    {
+      "title": "Forget-free Continual Learning with Winning Subnetworks"
+    },
+    {
+      "title": "Forget-free Continual Learning with Winning Subnetworks"
+    },
+    {
+      "title": "Small batch deep reinforcement learning"
+    },
+    {
+      "title": "Analysis of Stochastic Processes through Replay Buffers"
+    },
+    {
+      "title": "Analysis of Stochastic Processes through Replay Buffers"
+    },
+    {
+      "title": "Sample-Efficient Reinforcement Learning by Breaking the Replay Ratio Barrier"
+    },
+    {
+      "title": "Sample-Efficient Reinforcement Learning by Breaking the Replay Ratio Barrier"
+    },
+    {
+      "title": "Continual Learning in Low-rank Orthogonal Subspaces"
+    },
+    {
+      "title": "Contextual Transformation Networks for Online Continual Learning"
+    },
+    {
+      "title": "SparCL: Sparse Continual Learning on the Edge"
+    },
+    {
+      "title": "MECTA: Memory-Economic Continual Test-Time Model Adaptation"
+    },
+    {
+      "title": "Improving Task-free Continual Learning by Distributionally Robust Memory Evolution"
+    }
   ]
 }
