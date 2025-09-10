@@ -1,0 +1,30 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 78 packages in 913ms
+   Building curvadanorm @ file:///home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+      Built curvadanorm @ file:///home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+Prepared 6 packages in 1.41s
+Installed 8 packages in 429ms
+ + certifi==2025.8.3
+ + charset-normalizer==3.4.3
+ + curvadanorm==0.1.0 (from file:///home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910)
+ + idna==3.10
+ + numpy==2.3.3
+ + pyyaml==6.0.2
+ + requests==2.32.5
+ + urllib3==2.5.0
+PyTorch / PyG not available – running lightweight Iris experiment instead.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 458, in <module>
+    main()
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 454, in main
+    run_lightweight_iris(depths=[2, 4])
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 319, in run_lightweight_iris
+    probs = _softmax(logits)
+            ^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-a/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910/src/main.py", line 251, in _softmax
+    exp_z = np.exp(z - z.max(axis=1, keepdims=True))
+            ^^
+NameError: name 'np' is not defined
