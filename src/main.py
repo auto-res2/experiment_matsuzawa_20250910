@@ -27,7 +27,10 @@ except ImportError:  # likely executed with `python -m src.main`
 
 PACKAGE_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration2"
+# ------------------------------------------------------------------
+# Mandatory path update (cf. problem statement)
+# ------------------------------------------------------------------
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration3"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)

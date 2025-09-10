@@ -119,9 +119,12 @@ class SketchCLNet(nn.Module):
 
     def __init__(self, backbone_name: str, num_classes: int, k: int, sparsity: float):
         super().__init__()
-        # Support HuggingFace weights via timm's `hf_hub:` scheme.
-        if not backbone_name.startswith("hf_hub:") and "/" in backbone_name:
-            backbone_name = f"hf_hub:{backbone_name}"
+
+        # ------------------------------------------------------------------
+        # Timely fix: Remove brittle HF-hub redirection logic. We rely on
+        # backbones that are natively supported by timm. Any user-provided
+        # backbone name is passed through unchanged.
+        # ------------------------------------------------------------------
         self.backbone = timm.create_model(backbone_name, pretrained=True, num_classes=0)
         feat_dim = self.backbone.num_features
         self.count_sketch = CountSketch(feat_dim, k)
@@ -164,8 +167,15 @@ class SketchCLNet(nn.Module):
 ############################################################
 
 def build_model(method: str, num_classes: int, k: int, sparsity: float):
+    """Factory returning the model associated with *method*.
+
+    For SKETCH-CL we use a ResNet-18 backbone. Crucially, we now reference the
+    built-in `resnet18` checkpoint distributed with `timm`, rather than a
+    Hugging Face model that does not provide the YAML configuration expected by
+    timm (which caused the previous `KeyError: 'architecture'`).
+    """
     if method == "sketch_cl":
-        return SketchCLNet("frgfm/resnet18", num_classes, k, sparsity)
+        return SketchCLNet("resnet18", num_classes, k, sparsity)
     # baselines use the same ResNet-18 backbone to avoid extra dependencies
     return timm.create_model("resnet18", pretrained=True, num_classes=num_classes)
 
