@@ -107,8 +107,9 @@ if not CFG_PATH.exists():
 ###############################################################################
 
 def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
-    base_dir = ensure_dir(".research/iteration5")
-    images_dir = ensure_dir(".research/iteration5/images")
+    # Paths updated to follow mandatory iteration6 requirements
+    base_dir = ensure_dir(".research/iteration6")
+    images_dir = ensure_dir(".research/iteration6/images")
 
     all_results: Dict[str, Any] = {}
 
@@ -177,8 +178,14 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
                 raise RuntimeError("Best metrics were not captured – check training loop.")
             per_depth[depth] = best_metrics
 
+        # Save per-dataset results to mandatory JSON location
         json_path = base_dir / f"{dataset_name}.json"
         dump_json(per_depth, json_path)
+
+        # Print JSON content for verification as required
+        with json_path.open("r") as fp:
+            print(f"\n=== Results for {dataset_name} ===")
+            print(fp.read())
 
         depths = list(per_depth.keys())
         test_acc = [per_depth[d]["test_acc"] for d in depths]
@@ -212,7 +219,7 @@ def run_depth_stress_test(cfg: Dict[str, Any]) -> Dict[str, Any]:
 
         all_results[dataset_name] = per_depth
 
-    print("\n=== Experiment 1 – Depth Stress Test ===")
+    print("\n=== Experiment 1 – Depth Stress Test (aggregate) ===")
     print(json.dumps(all_results, indent=2))
     print("Figures written to", images_dir.resolve())
 
