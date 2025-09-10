@@ -1,0 +1,1133 @@
+=== uv sync start Wed Sep 10 06:59:52 AM UTC 2025 ===
+=== uv install end Wed Sep 10 06:59:57 AM UTC 2025 ===
+=== experiment start Wed Sep 10 06:59:57 AM UTC 2025 ===
+
+=== Running cifar100_sketch_cl_500KB ===
+Task 0 acc: 1.12%
+Task 1 acc: 1.49%
+Task 2 acc: 1.68%
+Task 3 acc: 1.84%
+Task 4 acc: 2.04%
+Task 5 acc: 1.95%
+Task 6 acc: 2.05%
+Task 7 acc: 2.28%
+Task 8 acc: 2.36%
+Task 9 acc: 2.62%
+Task 10 acc: 2.55%
+Task 11 acc: 2.76%
+Task 12 acc: 2.51%
+Task 13 acc: 2.75%
+Task 14 acc: 2.83%
+Task 15 acc: 2.87%
+Task 16 acc: 2.72%
+Task 17 acc: 2.73%
+Task 18 acc: 2.81%
+Task 19 acc: 2.86%
+{
+  "accuracy_per_task": [
+    1.12,
+    1.49,
+    1.68,
+    1.84,
+    2.04,
+    1.95,
+    2.05,
+    2.28,
+    2.36,
+    2.62,
+    2.55,
+    2.76,
+    2.51,
+    2.75,
+    2.83,
+    2.87,
+    2.72,
+    2.73,
+    2.81,
+    2.86
+  ],
+  "avg_final_accuracy": 2.798
+}
+
+=== Running cifar100_derpp_500KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_coreset_bilevel_500KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sparcl_dgm_500KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_uniform64_500KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_ucb_500KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sketch_cl_1024KB ===
+Task 0 acc: 1.20%
+Task 1 acc: 1.41%
+Task 2 acc: 1.61%
+Task 3 acc: 1.93%
+Task 4 acc: 1.86%
+Task 5 acc: 2.31%
+Task 6 acc: 2.06%
+Task 7 acc: 2.60%
+Task 8 acc: 2.38%
+Task 9 acc: 2.74%
+Task 10 acc: 2.72%
+Task 11 acc: 2.83%
+Task 12 acc: 2.70%
+Task 13 acc: 2.80%
+Task 14 acc: 2.97%
+Task 15 acc: 3.02%
+Task 16 acc: 2.94%
+Task 17 acc: 3.05%
+Task 18 acc: 3.06%
+Task 19 acc: 3.08%
+{
+  "accuracy_per_task": [
+    1.2,
+    1.41,
+    1.61,
+    1.93,
+    1.86,
+    2.31,
+    2.06,
+    2.6,
+    2.38,
+    2.74,
+    2.72,
+    2.83,
+    2.7,
+    2.8,
+    2.97,
+    3.02,
+    2.94,
+    3.05,
+    3.06,
+    3.08
+  ],
+  "avg_final_accuracy": 3.0300000000000002
+}
+
+=== Running cifar100_derpp_1024KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_coreset_bilevel_1024KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sparcl_dgm_1024KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_uniform64_1024KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_ucb_1024KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sketch_cl_2048KB ===
+Task 0 acc: 1.28%
+Task 1 acc: 1.45%
+Task 2 acc: 1.64%
+Task 3 acc: 1.68%
+Task 4 acc: 1.84%
+Task 5 acc: 1.89%
+Task 6 acc: 2.18%
+Task 7 acc: 2.34%
+Task 8 acc: 2.52%
+Task 9 acc: 2.44%
+Task 10 acc: 2.36%
+Task 11 acc: 2.37%
+Task 12 acc: 2.56%
+Task 13 acc: 2.21%
+Task 14 acc: 2.31%
+Task 15 acc: 2.45%
+Task 16 acc: 2.35%
+Task 17 acc: 2.43%
+Task 18 acc: 2.90%
+Task 19 acc: 2.59%
+{
+  "accuracy_per_task": [
+    1.28,
+    1.45,
+    1.64,
+    1.68,
+    1.84,
+    1.89,
+    2.18,
+    2.34,
+    2.52,
+    2.44,
+    2.36,
+    2.37,
+    2.56,
+    2.21,
+    2.31,
+    2.45,
+    2.35,
+    2.43,
+    2.9,
+    2.59
+  ],
+  "avg_final_accuracy": 2.544
+}
+
+=== Running cifar100_derpp_2048KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_coreset_bilevel_2048KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sparcl_dgm_2048KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_uniform64_2048KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_ucb_2048KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sketch_cl_5120KB ===
+Task 0 acc: 1.00%
+Task 1 acc: 1.47%
+Task 2 acc: 1.68%
+Task 3 acc: 1.93%
+Task 4 acc: 2.38%
+Task 5 acc: 2.29%
+Task 6 acc: 2.45%
+Task 7 acc: 2.55%
+Task 8 acc: 2.75%
+Task 9 acc: 2.90%
+Task 10 acc: 3.11%
+Task 11 acc: 3.02%
+Task 12 acc: 3.09%
+Task 13 acc: 3.24%
+Task 14 acc: 3.03%
+Task 15 acc: 3.06%
+Task 16 acc: 3.23%
+Task 17 acc: 3.16%
+Task 18 acc: 3.55%
+Task 19 acc: 3.23%
+{
+  "accuracy_per_task": [
+    1.0,
+    1.47,
+    1.68,
+    1.93,
+    2.38,
+    2.29,
+    2.45,
+    2.55,
+    2.75,
+    2.9,
+    3.11,
+    3.02,
+    3.09,
+    3.24,
+    3.03,
+    3.06,
+    3.23,
+    3.16,
+    3.55,
+    3.23
+  ],
+  "avg_final_accuracy": 3.246
+}
+
+=== Running cifar100_derpp_5120KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_coreset_bilevel_5120KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_sparcl_dgm_5120KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_uniform64_5120KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running cifar100_ucb_5120KB ===
+Task 0 acc: 1.22%
+Task 1 acc: 1.67%
+Task 2 acc: 2.39%
+Task 3 acc: 3.16%
+Task 4 acc: 3.71%
+Task 5 acc: 4.08%
+Task 6 acc: 4.63%
+Task 7 acc: 4.98%
+Task 8 acc: 5.57%
+Task 9 acc: 6.06%
+Task 10 acc: 6.04%
+Task 11 acc: 6.37%
+Task 12 acc: 6.52%
+Task 13 acc: 6.80%
+Task 14 acc: 6.74%
+Task 15 acc: 6.96%
+Task 16 acc: 7.10%
+Task 17 acc: 7.13%
+Task 18 acc: 7.79%
+Task 19 acc: 7.69%
+{
+  "accuracy_per_task": [
+    1.22,
+    1.67,
+    2.39,
+    3.16,
+    3.71,
+    4.08,
+    4.63,
+    4.98,
+    5.57,
+    6.06,
+    6.04,
+    6.37,
+    6.52,
+    6.8,
+    6.74,
+    6.96,
+    7.1,
+    7.13,
+    7.79,
+    7.69
+  ],
+  "avg_final_accuracy": 7.333999999999999
+}
+
+=== Running tiny_imagenet_sketch_cl_500KB ===
