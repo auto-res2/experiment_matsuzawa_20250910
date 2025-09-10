@@ -1,1 +1,18 @@
-# Please list the required python packages.
+[project]
+name = "generative-token-replay"
+version = "0.1.0"
+description = "Research code for Generative Token Replay (continual learning) – refactored"
+requires-python = ">=3.9"
+authors = ["Researcher <research@example.com>"]
+
+# Only lightweight, universally available dependencies are declared here to
+# keep installation fast and avoid wheels that might be missing in restricted
+# environments.
+dependencies = [
+  "numpy>=1.21.0",
+  "pyyaml>=6.0"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

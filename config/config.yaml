@@ -1,0 +1,12 @@
+# Minimal default configuration.  The expansive experiment settings from the
+# original monolithic script have been omitted to keep the validation runtime
+# small and because the heavy dependencies are not installed in this
+# lightweight environment.
+
+global:
+  seeds: [1]
+  mixed_precision: false
+  device: "cpu"
+
+datasets: {}
+models: {}
