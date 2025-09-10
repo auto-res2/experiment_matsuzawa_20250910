@@ -5,6 +5,7 @@ import matplotlib as mpl
 
 mpl.use("Agg")
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 #############################################
 # 1.  ACCURACY & EVAL                      #
@@ -28,8 +29,8 @@ def eval_model(model, data, mask) -> Tuple[float, torch.Tensor]:
 # 2.  VISUALISATION                        #
 #############################################
 
-def line_plot(x: List[int], y: List[float], *, ylabel: str, fname, save_dir):
-    """Line plot helper saving under .research/iteration2/images/* ."""
+def line_plot(x: List[int], y: List[float], *, ylabel: str, fname, save_dir: Path):
+    """Line plot helper saving under .research/iteration3/images/* ."""
     save_dir.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(6, 4))
     plt.plot(x, y, marker="o", label=ylabel)

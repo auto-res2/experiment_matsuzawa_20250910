@@ -76,16 +76,22 @@ class LCAMPLayer(MessagePassing):
     def estimate_curvature(
         x: torch.Tensor, edge_index: torch.Tensor
     ) -> torch.Tensor:
-        """Forman-style proxy of Ollivier–Ricci curvature:  κ = 1 − |h_i−h_j|₁ /(deg_i+deg_j)."""
-        row, col = edge_index
-        deg = degree(row, num_nodes=x.size(0), dtype=x.dtype) + degree(
-            col, num_nodes=x.size(0), dtype=x.dtype
-        )
+        """Forman-style proxy of Ollivier–Ricci curvature:  κ_e = 1 − |h_i−h_j|₁ /(deg_i+deg_j)."""
+        row, col = edge_index  # (E,), (E,)
+
+        # Degree per node (N,)
+        deg = degree(row, num_nodes=x.size(0), dtype=x.dtype)
+
+        # L1 distance per edge (E,)
         diff = (x[row] - x[col]).abs().sum(dim=1)
-        kappa = 1.0 - diff / (deg + 1e-6)
+
+        # Edge-level denominator: deg_i + deg_j  – align shapes by indexing
+        denom = deg[row] + deg[col]
+        kappa = 1.0 - diff / (denom + 1e-6)
         return kappa  # (E,)
 
     def message(self, x_j, x_i, index, ptr, size_i, kappa):  # pylint: disable=arguments-differ
+        # Attention logits per edge
         logits = self.w_att - self.gamma * kappa
         alpha = torch.softmax(logits, dim=0)
         return alpha.view(-1, 1) * x_j
@@ -95,9 +101,10 @@ class LCAMPLayer(MessagePassing):
         kappa = self.estimate_curvature(x_proj, edge_index)
         out = self.propagate(edge_index, x=x_proj, kappa=kappa)
 
+        # Optional curvature-guided top-K shortcut
         if self.shortcut:
             row, col = edge_index
-            _, top_idx = torch.topk(-kappa, k=self.K)
+            _, top_idx = torch.topk(-kappa, k=min(self.K, kappa.numel()))  # guard K>E
             shortcut_msg = self.lin_short(x[col[top_idx]])
             out.index_add_(0, row[top_idx], shortcut_msg)
         return out
