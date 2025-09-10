@@ -33,4 +33,6 @@ def load_dataset(name: str):
     except Exception as exc:  # pragma: no-cover  pylint: disable=broad-except
         raise RuntimeError(f"Failed to load dataset '{name}': {exc}") from exc
 
-    raise RuntimeError(f"Dataset '{name}' not supported – aborting as per NO-FALLBACK policy.")
+    raise RuntimeError(
+        f"Dataset '{name}' not supported – aborting as per NO-FALLBACK policy."
+    )

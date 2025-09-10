@@ -2,7 +2,7 @@
     python -m src.main
 This script orchestrates the depth-scalability experiment (Exp-1) using
 configuration loaded from config/config.yaml and stores artifacts under
-.research/iteration1/ …
+.research/iteration2/ …
 """
 from __future__ import annotations
 
@@ -15,15 +15,14 @@ import torch
 import torch.optim as optim
 import yaml
 
-from .train import (GNNStack, SEED_LIST, TrainState, set_seed,
-                    train_one_epoch)
+from .train import GNNStack, SEED_LIST, TrainState, set_seed, train_one_epoch
 from .evaluate import eval_model, line_plot
 from .preprocess import load_dataset
 
 # ---------------------------------------------------------------------
 # 1.  DIRECTORIES & DEVICE
 # ---------------------------------------------------------------------
-RESEARCH_DIR = Path(".research") / "iteration1"
+RESEARCH_DIR = Path(".research") / "iteration2"
 IMG_DIR = RESEARCH_DIR / "images"
 RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
 IMG_DIR.mkdir(parents=True, exist_ok=True)
@@ -55,30 +54,35 @@ def run_depth_scalability(cfg_exp: Dict[str, Any]):
         for depth in cfg_exp["depth_grid"]:
             cfg_model = {
                 "backbone": cfg_exp["backbone"],
-                "wrapper" : cfg_exp["wrapper"],
-                "depth"   : depth,
-                "hidden"  : cfg_exp["hidden"],
-                "dropout" : cfg_exp["dropout"],
-                "K"       : cfg_exp["K"],
+                "wrapper": cfg_exp["wrapper"],
+                "depth": depth,
+                "hidden": cfg_exp["hidden"],
+                "dropout": cfg_exp["dropout"],
+                "K": cfg_exp["K"],
             }
 
             acc_seeds: List[float] = []
             for seed in SEED_LIST:
                 set_seed(seed)
                 model = GNNStack(cfg_model, data).to(DEVICE)
-                opt = optim.AdamW(model.parameters(), lr=cfg_exp["lr"],
-                                   weight_decay=cfg_exp["weight_decay"])
+                opt = optim.AdamW(
+                    model.parameters(),
+                    lr=cfg_exp["lr"],
+                    weight_decay=cfg_exp["weight_decay"],
+                )
                 state = TrainState(epoch=0, best_val=0.0, best_epoch=0)
 
                 best_state_dict = None
                 for epoch in range(cfg_exp["epochs"]):
-                    loss = train_one_epoch(model, data, opt)
+                    _ = train_one_epoch(model, data, opt)
                     val_acc, _ = eval_model(model, data, data.val_mask)
 
                     if val_acc > state.best_val:
                         state.best_val = val_acc
                         state.best_epoch = epoch
-                        best_state_dict = {k: v.detach().cpu() for k, v in model.state_dict().items()}
+                        best_state_dict = {
+                            k: v.detach().cpu() for k, v in model.state_dict().items()
+                        }
 
                     if epoch - state.best_epoch > cfg_exp["patience"]:
                         break
@@ -112,6 +116,7 @@ def run_depth_scalability(cfg_exp: Dict[str, Any]):
     line_plot(xs, ys, ylabel="Accuracy", fname="accuracy_depth.pdf", save_dir=IMG_DIR)
     print("Figure saved to", IMG_DIR / "accuracy_depth.pdf")
 
+
 # ---------------------------------------------------------------------
 # 4.  MAIN
 # ---------------------------------------------------------------------
@@ -124,6 +129,7 @@ def main():
     run_depth_scalability(cfg_exp1)
     elapsed = (time.time() - start) / 60.0
     print(f"\nTotal wall-clock time: {elapsed:.2f} min")
+
 
 if __name__ == "__main__":
     main()
