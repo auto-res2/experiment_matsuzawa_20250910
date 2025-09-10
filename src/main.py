@@ -30,7 +30,7 @@ CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
 # ------------------------------------------------------------------
 # Mandatory path update (cf. problem statement)
 # ------------------------------------------------------------------
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration4"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration5"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)

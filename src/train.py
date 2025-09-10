@@ -47,14 +47,17 @@ class CountSketch(nn.Module):
         idx = torch.randint(0, k, (in_dim,))
         sgn = torch.randint(0, 2, (in_dim,)) * 2 - 1  # ±1
         self.register_buffer("idx", idx, persistent=False)
+        # store as float for later multiplication, but we will cast on the fly
         self.register_buffer("sgn", sgn.float(), persistent=False)
         self.k = k
         self.in_dim = in_dim
 
     def forward(self, x: torch.Tensor):  # x:(B,D)
+        # Ensure dtype consistency to avoid `scatter` runtime errors under AMP
+        sgn = self.sgn.to(dtype=x.dtype)
         res = torch.zeros(x.size(0), self.k, device=x.device, dtype=x.dtype)
         idx_exp = self.idx.expand(x.size(0), -1)
-        res.scatter_add_(1, idx_exp, x * self.sgn)
+        res.scatter_add_(1, idx_exp, x * sgn)
         return res
 
 
@@ -111,7 +114,8 @@ class SparseLinear(nn.Linear):
         new_mask = torch.ones_like(self.weight, dtype=torch.bool).flatten()
         new_mask[idx] = 0
         self.mask = new_mask.view_as(self.weight)
-        self.weight.data *= self.mask  # zeroed-out parameters
+        # Ensure pruned parameters are zeroed *and* stay zero during optimisation
+        self.weight.data *= self.mask
 
     def forward(self, x):
         return F.linear(x, self.weight * self.mask, self.bias)
@@ -124,9 +128,7 @@ class SketchCLNet(nn.Module):
         super().__init__()
 
         # ------------------------------------------------------------------
-        # Timely fix: Remove brittle HF-hub redirection logic. We rely on
-        # backbones that are natively supported by timm. Any user-provided
-        # backbone name is passed through unchanged.
+        # Use timm-native models exclusively to avoid HF YAML resolution bugs
         # ------------------------------------------------------------------
         self.backbone = timm.create_model(backbone_name, pretrained=True, num_classes=0)
         feat_dim = self.backbone.num_features
@@ -170,13 +172,7 @@ class SketchCLNet(nn.Module):
 ############################################################
 
 def build_model(method: str, num_classes: int, k: int, sparsity: float):
-    """Factory returning the model associated with *method*.
-
-    For SKETCH-CL we use a ResNet-18 backbone. Crucially, we now reference the
-    built-in `resnet18` checkpoint distributed with `timm`, rather than a
-    Hugging Face model that does not provide the YAML configuration expected by
-    timm (which caused the previous `KeyError: 'architecture'`).
-    """
+    """Factory returning the model associated with *method*."""
     if method == "sketch_cl":
         return SketchCLNet("resnet18", num_classes, k, sparsity)
     # baselines use the same ResNet-18 backbone to avoid extra dependencies
