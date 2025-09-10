@@ -1,0 +1,16 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+  × No solution found when resolving dependencies for split (markers:
+  │ python_full_version >= '3.11'):
+  ╰─▶ Because only graphriccicurvature<=0.5.3.2 is available and
+      curvadanorm[full] depends on graphriccicurvature>=0.7.0,<1.0, we can
+      conclude that curvadanorm[full]'s requirements are unsatisfiable.
+      And because your project requires curvadanorm[full], we can conclude
+      that your project's requirements are unsatisfiable.
+  × No solution found when resolving dependencies for split (markers:
+  │ python_full_version >= '3.11'):
+  ╰─▶ Because only graphriccicurvature<=0.5.3.2 is available and
+      curvadanorm[full] depends on graphriccicurvature>=0.7.0,<1.0, we can
+      conclude that curvadanorm[full]'s requirements are unsatisfiable.
+      And because your project requires curvadanorm[full], we can conclude
+      that your project's requirements are unsatisfiable.
