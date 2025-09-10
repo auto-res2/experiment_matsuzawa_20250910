@@ -10,7 +10,7 @@ processing dependencies.
 from __future__ import annotations
 
 import importlib
-from typing import Any, Dict, Tuple
+from typing import Any, Dict, NoReturn, Tuple
 
 # ---------------------------------------------------------------------------
 #            TRY TO FORWARD TO THE FULL IMPLEMENTATION IF AVAILABLE
@@ -26,7 +26,7 @@ try:
 
 except Exception as ex:  # pragma: no cover – minimal environment fallback
 
-    def build_stream(*args: Tuple[Any, ...], **kwargs: Dict[str, Any]):  # type: ignore[return-value]
+    def build_stream(*args: Tuple[Any, ...], **kwargs: Dict[str, Any]) -> NoReturn:  # noqa: D401
         """Placeholder that reminds the user about the missing heavy stack."""
 
         raise RuntimeError(
