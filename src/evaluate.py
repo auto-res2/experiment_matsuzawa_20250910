@@ -30,13 +30,13 @@ def eval_model(model, data, mask) -> Tuple[float, torch.Tensor]:
 #############################################
 
 def line_plot(x: List[int], y: List[float], *, ylabel: str, fname, save_dir: Path):
-    """Line plot helper saving under .research/iteration3/images/* ."""
+    """Line plot helper saving under .research/iteration4/images/* ."""
     save_dir.mkdir(parents=True, exist_ok=True)
     plt.figure(figsize=(6, 4))
     plt.plot(x, y, marker="o", label=ylabel)
     for xi, yi in zip(x, y):
         plt.annotate(f"{yi:.3f}", (xi, yi))
-    plt.xlabel("Epoch")
+    plt.xlabel("Depth")
     plt.ylabel(ylabel)
     plt.legend()
     plt.tight_layout()

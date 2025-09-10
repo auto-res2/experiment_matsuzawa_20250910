@@ -179,7 +179,12 @@ class GNNStack(nn.Module):
     # ------------------------------------------------------------------
     def forward(self, x, edge_index):
         for layer in self.layers:
-            x = layer(x, edge_index)
+            # Support both MessagePassing-style (expects x, edge_index) and
+            # GCN2Conv which expects (x, x0, edge_index).
+            if isinstance(layer, GCN2Conv):
+                x = layer(x, x, edge_index)
+            else:
+                x = layer(x, edge_index)
             if self.pairnorm is not None:
                 x = self.pairnorm(x)
             x = F.relu(x)

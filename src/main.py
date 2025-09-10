@@ -2,7 +2,7 @@
 Execute with `python -m src.main`
 This script orchestrates the depth-scalability experiment (Exp-1) using
 configuration loaded from config/config.yaml and stores artifacts under
-.research/iteration3/ …
+.research/iteration4/ …
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ from .preprocess import load_dataset
 # ---------------------------------------------------------------------
 # 1.  DIRECTORIES & DEVICE
 # ---------------------------------------------------------------------
-RESEARCH_DIR = Path(".research") / "iteration3"
+RESEARCH_DIR = Path(".research") / "iteration4"
 IMG_DIR = RESEARCH_DIR / "images"
 RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
 IMG_DIR.mkdir(parents=True, exist_ok=True)
