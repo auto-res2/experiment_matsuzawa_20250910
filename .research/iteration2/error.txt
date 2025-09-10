@@ -1,0 +1,10 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 5 packages in 20ms
+   Building generative-token-replay @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+      Built generative-token-replay @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+Prepared 1 package in 1.13s
+Installed 3 packages in 521ms
+ + generative-token-replay==0.1.0 (from file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910)
+ + numpy==2.3.3
+ + pyyaml==6.0.2
