@@ -119,6 +119,8 @@ class ContinualSplit:
 
     def get_test_loader(self, batch_size: int, num_workers: int):
         split = "test" if "cifar" in self.name.lower() else "validation"
-        test_ds = load_dataset(self.raw.builder_name, split=split, cache_dir=self.raw.cache_dir)
+        # `builder_name` lives under `.info` for datasets>=2.x
+        builder_name = self.raw.info.builder_name
+        test_ds = load_dataset(builder_name, split=split, cache_dir=self.raw.cache_dir)
         test_ds = _TorchWrapper(test_ds, transform=self.test_transform)
         return DataLoader(test_ds, batch_size=batch_size, shuffle=False, num_workers=num_workers)

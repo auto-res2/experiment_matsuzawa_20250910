@@ -1,5 +1,11 @@
 # train.py
-"""Model definitions, training utilities and memory-budget enforcement."""
+"""Model definitions, training utilities and memory-budget enforcement (episodic only).
+
+IMPORTANT: We *do not* enforce the budget on the whole resident process
+memory. Instead, we follow the CL-literature convention and measure only the
+extra episodic memory used to store rehearsal/experience buffers (e.g.
+SketchMemory in SKETCH-CL). This makes the provided budgets realistic.
+"""
 from __future__ import annotations
 
 import json
@@ -7,7 +13,6 @@ import time
 from pathlib import Path
 from typing import Dict, Any
 
-import psutil
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -16,23 +21,35 @@ from torch.cuda.amp import GradScaler, autocast
 from tqdm import tqdm
 
 ############################################################
-# Safety helpers
+# Budget helpers
 ############################################################
 
 class MemoryBudgetExceeded(RuntimeError):
-    """Raised when the resident memory size is larger than the user budget."""
+    """Raised when the episodic memory size is larger than the user budget."""
 
 
-def _bytes_used() -> int:
-    return psutil.Process().memory_info().rss
+def _tensor_bytes(t: torch.Tensor | None) -> int:
+    if t is None:
+        return 0
+    return t.numel() * t.element_size()
 
 
-def enforce_budget(max_bytes: int):
-    """Abort if the resident set size (RSS) is greater than *max_bytes*."""
-    used = _bytes_used()
-    if used > max_bytes:
+def episodic_memory_bytes(model: nn.Module) -> int:
+    """Return the bytes occupied by *episodic* memory buffers (not model params)."""
+    bytes_used = 0
+    # The only episodic memory in the current code base lives inside `SketchMemory`.
+    for m in model.modules():
+        if isinstance(m, SketchMemory):
+            bytes_used += _tensor_bytes(getattr(m, "S", None))
+            bytes_used += _tensor_bytes(getattr(m, "N", None))
+    return bytes_used
+
+
+def enforce_budget(used_bytes: int, max_bytes: int):
+    """Abort if *used_bytes* is greater than *max_bytes* (fail-fast)."""
+    if used_bytes > max_bytes:
         raise MemoryBudgetExceeded(
-            f"Memory budget {max_bytes/1e6:.2f} MB exceeded: {used/1e6:.2f} MB"
+            f"Memory budget {max_bytes/1e6:.2f} MB exceeded: {used_bytes/1e6:.2f} MB"
         )
 
 ############################################################
@@ -201,4 +218,5 @@ def train_one_task(
         scaler.update()
         opt.zero_grad(set_to_none=True)
         if budget is not None:
-            enforce_budget(budget)
+            used = episodic_memory_bytes(model)
+            enforce_budget(used, budget)

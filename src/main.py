@@ -30,11 +30,12 @@ CONFIG_FILE = PACKAGE_ROOT / "config" / "config.yaml"
 # ------------------------------------------------------------------
 # Mandatory path update (cf. problem statement)
 # ------------------------------------------------------------------
-RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration5"
+RESEARCH_DIR = PACKAGE_ROOT / ".research" / "iteration6"
 IMAGES_DIR = RESEARCH_DIR / "images"
 # Ensure directories exist
 IMAGES_DIR.mkdir(parents=True, exist_ok=True)
 RESEARCH_DIR.mkdir(parents=True, exist_ok=True)
+
 
 
 
@@ -78,16 +79,22 @@ def run_experiment_1(cfg):
                 ).to(device)
                 # training across tasks
                 acc_curve = []
-                for task_id in range(dcfg["n_tasks"]):
-                    loader = ds.get_task_loader(
-                        task_id, e_cfg["optim"]["batch_live"], common["num_workers"]
-                    )
-                    tr.train_one_task(
-                        model, loader, {**e_cfg["optim"], **common}, device, budget=budget
-                    )
-                    acc = ev.evaluate(model, ds.get_test_loader(256, common["num_workers"]), device)
-                    acc_curve.append(acc)
-                    print(f"Task {task_id} acc: {acc:.2f}%")
+                try:
+                    for task_id in range(dcfg["n_tasks"]):
+                        loader = ds.get_task_loader(
+                            task_id, e_cfg["optim"]["batch_live"], common["num_workers"]
+                        )
+                        tr.train_one_task(
+                            model, loader, {**e_cfg["optim"], **common}, device, budget=budget
+                        )
+                        acc = ev.evaluate(model, ds.get_test_loader(256, common["num_workers"]), device)
+                        acc_curve.append(acc)
+                        print(f"Task {task_id} acc: {acc:.2f}%")
+                except tr.MemoryBudgetExceeded as e:
+                    print(str(e))
+                    # Record the failure and continue with the next (method,budget) pair.
+                    json_results[run_key] = {"error": str(e)}
+                    continue
 
                 res = {
                     "accuracy_per_task": acc_curve,
@@ -122,11 +129,8 @@ def main():
         print("Configuration file not found. Abort.")
         sys.exit(1)
 
-    try:
-        run_experiment_1(cfg)
-    except tr.MemoryBudgetExceeded as e:
-        print(str(e))
-        sys.exit(1)
+    # Run experiment – individual failures are handled inside the loop.
+    run_experiment_1(cfg)
 
 
 if __name__ == "__main__":
