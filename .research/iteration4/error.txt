@@ -1,0 +1,16 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 10 packages in 80ms
+   Building curvadanorm @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+      Built curvadanorm @ file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910
+Prepared 1 package in 1.25s
+Installed 8 packages in 416ms
+ + certifi==2025.8.3
+ + charset-normalizer==3.4.3
+ + curvadanorm==0.1.0 (from file:///home/toma/t-80-8-b-01/_work/experiment_matsuzawa_20250910/experiment_matsuzawa_20250910)
+ + idna==3.10
+ + numpy==2.3.3
+ + pyyaml==6.0.2
+ + requests==2.32.5
+ + urllib3==2.5.0
+Required scientific libraries (PyTorch / PyG) not available – skipping heavy experiments.  Install torch>=2.0 and torch_geometric to enable full functionality.
