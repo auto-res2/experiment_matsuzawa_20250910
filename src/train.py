@@ -8,7 +8,7 @@ This module serves two roles:
 2. When executed as a script (``python -m src.train`` or
    ``python src/train.py``), it runs a *minimal* end-to-end experiment that
    produces concrete numerical results.  These results are saved as JSON
-   files in ``.research/iteration5/`` and printed to stdout so that the
+   files in ``.research/iteration6/`` and printed to stdout so that the
    automated grader can validate them.
 
 The implementation purposefully stays *very* lightweight – it only relies on
@@ -43,8 +43,8 @@ __all__ = ["ContinualTrainer"]
 #                       SCRIPT ENTRY-POINT (EXPERIMENT)
 # ---------------------------------------------------------------------------
 
-# MANDATORY path required by the grading rubric (iteration **5**)
-_JSON_ROOT = Path(".research/iteration5")
+# MANDATORY path required by the grading rubric (iteration **6**)
+_JSON_ROOT = Path(".research/iteration6")
 
 
 def _load_config() -> Dict[str, Any]:
