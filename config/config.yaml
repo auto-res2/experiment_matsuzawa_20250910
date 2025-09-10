@@ -1,0 +1,32 @@
+common:
+  device: cuda
+  num_workers: 8
+  precision: fp16
+  data_root: data
+  seeds: [123, 231, 312]
+
+experiment_1:
+  name: memory_budget_sweep
+  datasets:
+    cifar100:
+      hf_repo: uoft-cs/cifar100
+      split: train
+      n_tasks: 20
+      classes_per_task: 5
+      img_size: 32
+    tiny_imagenet:
+      hf_repo: zh-plus/tiny-imagenet
+      split: train
+      n_tasks: 20
+      classes_per_task: 10
+      img_size: 64
+  budgets_bytes: [512000, 1048576, 2097152, 5242880]
+  methods: [sketch_cl, derpp, coreset_bilevel, sparcl_dgm, uniform64, ucb]
+  optim:
+    lr: 0.0002
+    weight_decay: 0.01
+    batch_live: 32
+    batch_replay: 16
+    epochs_per_task: 1
+  sketch_sizes: [64, 128, 256]
+  sparsities: [0.9]
